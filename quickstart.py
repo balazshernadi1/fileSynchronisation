@@ -22,22 +22,22 @@ if os.path.exists("token.json"):
 
 if not creds or not creds.valid:
     if creds and creds.expired and creds.refresh_token:
-      # If there are no (valid) credentials available, let the user log in.
-      creds.refresh(Request())
+        # If there are no (valid) credentials available, let the user log in.
+        creds.refresh(Request())
     else:
-      flow = InstalledAppFlow.from_client_secrets_file(
-          "credentials.json", SCOPES
-      )
-      creds = flow.run_local_server(port=0)
+        flow = InstalledAppFlow.from_client_secrets_file(
+            "credentials.json", SCOPES
+        )
+        creds = flow.run_local_server(port=0)
     # Save the credentials for the next run
     with open("token.json", "w") as token:
-      token.write(creds.to_json())
-
+        token.write(creds.to_json())
 
 
 def changeDateFormat(timeDate):
-  date = datetime.datetime.utcfromtimestamp(timeDate)
-  return date.strftime('%d %b %Y %H %M %S')
+    date = datetime.datetime.utcfromtimestamp(timeDate)
+    return date.strftime('%d %b %Y %H : %M : %S')
+
 
 def checkChanges():
     with os.scandir(PATH_TO_LOCAL_FILES) as dir_entries:
@@ -64,7 +64,6 @@ def checkChanges():
 
     except HttpError as err:
         print(err.error_details)
-
 
 
 '''
